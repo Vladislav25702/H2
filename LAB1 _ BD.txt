@@ -1,12 +1,12 @@
-CREATE TABLE Doctors(id int primary key, surname varchar(255), name varchar(255),ot varchar(255)) ;
-CREATE TABLE Patients(id int primary key, surname varchar(255), name varchar(255), ot varchar(255), id_doctor int,  FOREIGN KEY (id_doctor) REFERENCES Doctors(id));
+CREATE TABLE Doctors(id int auto_increment primary key, surname varchar(255), name varchar(255),ot varchar(255)) ;
+CREATE TABLE Patients(id int auto_increment primary key, surname varchar(255), name varchar(255), ot varchar(255), id_doctor int,  FOREIGN KEY (id_doctor) REFERENCES Doctors(id));
 
 
 
-INSERT INTO `Doctors` (`id`, `Surname`, `Name`, `Ot`) VALUES (1, 'Иванов', 'Иван', 'Иванович');
-INSERT INTO `Doctors` (`id`, `Surname`, `Name`, `Ot`) VALUES (2, 'Вячеславов', 'Андрей', 'Вячеславович');
-INSERT INTO `Doctors` (`id`, `Surname`, `Name`, `Ot`) VALUES (3, 'Анатольев', 'Илья', 'Павлович');
+INSERT INTO `Doctors` ( `Surname`, `Name`, `Ot`) VALUES ('Иванов', 'Иван', 'Иванович');
+INSERT INTO `Doctors` ( `Surname`, `Name`, `Ot`) VALUES ( 'Вячеславов', 'Андрей', 'Вячеславович');
+INSERT INTO `Doctors` ( `Surname`, `Name`, `Ot`) VALUES ( 'Анатольев', 'Илья', 'Павлович');
 
-INSERT INTO `Patients` (`id`, `Surname`, `Name`, `Ot`, `id_doctor`) VALUES (1, 'Максимов', 'Никита', 'Андреевич', 1);
-INSERT INTO `Patients` (`id`, `Surname`, `Name`, `Ot`, `id_doctor`) VALUES (2, 'Павлов', 'Андрей', 'Максимович', 2);
-INSERT INTO `Patients` (`id`, `Surname`, `Name`, `Ot`, `id_doctor`) VALUES (3, 'Гвоздьев', 'Павел', 'Генадьевич', 3);
+INSERT INTO `Patients` (`Surname`, `Name`, `Ot`, `id_doctor`) VALUES ( 'Максимов', 'Никита', 'Андреевич', 1);
+INSERT INTO `Patients` ( `Surname`, `Name`, `Ot`, `id_doctor`) VALUES ( 'Павлов', 'Андрей', 'Максимович', 2);
+INSERT INTO `Patients` ( `Surname`, `Name`, `Ot`, `id_doctor`) VALUES ( 'Гвоздьев', 'Павел', 'Генадьевич', 3);
