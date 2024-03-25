@@ -4,19 +4,16 @@ import java.util.*;
 
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
-        PatientRepository patientRepository = new PatientsRepository();
-        DoctorRepository doctorRepository = new DoctorsRepository();
+    public static void main(String[] args) throws Exception{
+        PatientsRepository patientsRepo = new PatientsRepository();
+        DoctorsRepository doctorsRepo = new DoctorsRepository();
 
-        List<Patients> patients = patientRepository.getList();
-        List<Doctors> doctors = doctorRepository.getList();
-
-
-
+        List<Patients> patients = patientsRepo.getList();
+        List<Doctors> doctors = doctorsRepo.getList();
 
 
         for (Patients patient : patients) {
-            Pr.printPatientsDoctors(patient); 
+            Pr.printPatientsDoctors(patient);
 
         }
     }

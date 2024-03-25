@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.PatientRepository;
+import org.example.PatientsRepository;
 import org.example.Patients;
 
 import java.sql.*;
@@ -10,22 +10,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientsRepository implements PatientRepository {
+public class PatientsRepository implements IPatientRepository {
     @Override
-    public Integer Insert(Patients client) throws SQLException {
-        String str = String.format("INSERT INTO patients (surname, name, ot, id_doctor) VALUES ('%s', '%s', '%s', '%s')",
-                client.getName(),
-                client.getSurname(),
-                client.getOt(),
-                client.getIdDoctor().getId());
-        Statement stmt = this.getStatement(this.connectToDB());
-        stmt.execute(str);
-        stmt.close();
-        try (ResultSet rs = this.getStatement(this.connectToDB()).executeQuery("SELECT MAX(id) FROM Patients")) {
-            while (rs.next()) {
-                return rs.getInt(1);
+    public void Insert(Patients patients) throws SQLException {
+        String str = String.format("INSERT INTO patients (surname, name, ot, id_doctor) VALUES (?, ?, ?,?)");
+        try (Connection conn = connectToDB();
+             PreparedStatement statement = conn.prepareStatement(str, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, patients.getName());
+            statement.setString(2, patients.getSurname());
+            statement.setString(3, patients.getOt());
+            statement.setInt(4, patients.getIdDoctor().getId());
+            statement.executeUpdate();
+
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    patients.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Failed to get generated id for client.");
+                }
             }
-            return -1;
         }
     }
 
