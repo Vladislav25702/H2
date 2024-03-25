@@ -16,7 +16,7 @@ public class Main {
 
 
         for (Patients patient : patients) {
-            Pr.printPatientsDoctors(patient); // Print information about client-stylist
+            Pr.printPatientsDoctors(patient); 
 
         }
     }
